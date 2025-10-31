@@ -3,6 +3,8 @@
 #Computer Programming / Period: 2
 # October 25, 2025
 
+#yay I can use github from VS CODE!
+
 
 import math
 import random
