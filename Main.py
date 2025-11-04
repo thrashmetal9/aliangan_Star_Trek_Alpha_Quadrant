@@ -35,6 +35,7 @@ class Game:
       #This pulls the image to place for the sprite. Calls on folder where the image is located and imports it. 
       self.player_img = pg.image.load(path.join(self.img_folder, 'U.S.S._Enterprise_A.png')).convert_alpha()
       self.player_img_inv = pg.image.load(path.join(self.img_folder, 'U.S.S._Enterprise_A.png')).convert_alpha()
+      self.bg_img = pg.image.load("")
 
     def new(self):
       # the sprite Group allows us to upate and draw sprite in grouped batches using imported files, etc.

@@ -36,6 +36,13 @@ class Player(Sprite):
         self. dir = vec(0,0)
         self.flying = False
         self.last_update = 0
+        self.jump_power = 100
+    # def jump(self):
+    #     hits = pg.sprite.collide(self, self.game.all_walls, False)
+    #     self.rect.y += 1
+    #     hits = pg.sprite.spritecollide(self,self.game.all_walls)
+    #     if hits: 
+    #         self.vel.y = -self.jump_power  
     # def load_images(self):
     #     self.standing_frames = [self.spritesheet.get_image(0,0,32,32),
     #                             self.spritesheet.get_image(0,32,32,32)]
@@ -62,7 +69,9 @@ class Player(Sprite):
     def get_keys(self):
         self.vel = vec(0,0)
         keys = pg.key.get_pressed()
-        # if keys[pg.K_SPACE]:
+        if keys[pg.K_SPACE]: 
+            self.jump()
+        # if keys[pg.K_e]:
             # p = Projectile(self.game, self.rect.x, self.rect.y, self.dir)
         if keys[pg.K_w]:
             self.vel.y = -self.speed*self.game.dt
