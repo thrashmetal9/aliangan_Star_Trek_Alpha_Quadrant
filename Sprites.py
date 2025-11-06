@@ -196,10 +196,14 @@ class Mob(Sprite):
     def __init__(self, game, x, y):
         self.game = game
         self.groups = game.all_sprites, game.all_mobs
+        # self.spritesheet = Spritesheet(path.join(self.game.img_folder, "spritesheet.png"))
         Sprite.__init__(self, self.groups)
         self.game = game
         self.image = pg.Surface((32, 32))
-        self.image.fill(RED)
+        self.image = game.mob_img
+        # self.image.fill(RED)
+        self.image.set_colorkey(BLACK)
+        self.image_inv = game.mob_img_inv
         self.rect = self.image.get_rect()
         self.vel = vec(choice([1,1]), choice([-1,1]))
         self.pos = vec(x,y)*TILESIZE[0]
@@ -229,7 +233,21 @@ class Mob(Sprite):
                     self.pos.y = hits[0].rect.bottom 
                 self.rect.y = self.pos.y
                 self.vel.y *= choice([-1,1])
-
+    def update(self):
+        if self.game.player.pos.x > self.pos.x:
+            self.vel.x = 1
+        else:
+            self.vel.x = -1
+        if self.game.player.pos.y > self.pos.y:
+            self.vel.y = 1
+        else:
+            self.vel.y = -1
+            # print("I don't need to chase the player x")
+        self.pos += self.vel * self.speed
+        self.rect.x = self.pos.x
+        self.collide_with_walls('x')
+        self.rect.y = self.pos.y
+        self.collide_with_walls('y')
 class Wall(Sprite):
     def __init__(self,game, x, y, state):
         self.game = game

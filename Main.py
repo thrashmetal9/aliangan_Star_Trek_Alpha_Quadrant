@@ -24,7 +24,7 @@ class Game:
       pg.display.set_caption("Aiden Aliangan's awesome game!!!!!")
       self.playing = True
       #set up a game folder directory path using the current folder containing THIS file 
-#Gives the Geme class a map property which uses the Map class to parse the level1.txt file 
+#Gives the Geme class a map property which uses the Map class to parse the level2.txt file 
     def load_data(self):
       #Current directory for path
       #Create all sprite groups
@@ -35,7 +35,12 @@ class Game:
       #This pulls the image to place for the sprite. Calls on folder where the image is located and imports it. 
       self.player_img = pg.image.load(path.join(self.img_folder, 'U.S.S._Enterprise_A.png')).convert_alpha()
       self.player_img_inv = pg.image.load(path.join(self.img_folder, 'U.S.S._Enterprise_A.png')).convert_alpha()
-      self.bg_img = pg.image.load("")
+      self.player_img = pg.transform.scale(self.player_img,(110,50))
+      #loads image from the images folder and assigning it to become the background image for the game
+      self.mob_img = pg.image.load(path.join(self.img_folder, 'klingon_BOP.png.png')).convert_alpha()
+      self.mob_img_inv = pg.image.load(path.join(self.img_folder,'klingon_BOP.png.png')).convert_alpha()
+      self.bg_img = pg.image.load(path.join(self.img_folder,'Space_Wallpaper.png')).convert_alpha()
+      self.bg_img = pg.transform.scale(self.bg_img,(WIDTH, HEIGHT))
 
     def new(self):
       # the sprite Group allows us to upate and draw sprite in grouped batches using imported files, etc.
@@ -121,6 +126,7 @@ class Game:
         self.screen.fill(WHITE)
         self.all_sprites.draw(self.screen)
         self.screen.fill(WHITE)
+        self.screen.blit(self.bg_img,(0,0))
         self.draw_text(self.screen, str(self.player.health), 24, BLACK,100,100)
         self.draw_text(self.screen, str(self.player.coins), 24, BLACK,400,100)
         self.draw_text(self.screen, str(pg.time.get_ticks()//1000),24, BLACK, 500,100)
