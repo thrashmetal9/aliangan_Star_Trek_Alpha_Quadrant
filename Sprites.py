@@ -192,7 +192,7 @@ class Player(Sprite):
         #     print("Ready")
 #Initiating Class Mob by defining speciic properties, characteristics, and adding them to my game 
 class Mob(Sprite): 
-    #Specific properties and certain dimmensions and characteristics for Mob
+    #Defining specific properties and certain dimmensions and characteristics for Mob
     def __init__(self, game, x, y):
         self.game = game
         self.groups = game.all_sprites, game.all_mobs
@@ -200,11 +200,14 @@ class Mob(Sprite):
         Sprite.__init__(self, self.groups)
         self.game = game
         self.image = pg.Surface((32, 32))
+        #Loads the image assigned to the mob - defining the physical attributes or properties of the mob
         self.image = game.mob_img
         # self.image.fill(RED)
+        #Gets rid of background image and also any part of the mob that is black
         self.image.set_colorkey(BLACK)
         self.image_inv = game.mob_img_inv
         self.rect = self.image.get_rect()
+        #Gives the mob movement 
         self.vel = vec(choice([1,1]), choice([-1,1]))
         self.pos = vec(x,y)*TILESIZE[0]
         self.speed = 5
@@ -295,3 +298,8 @@ class Projectile(Sprite):
         hits = pg.sprite.spritecollide(self, self.game.all_walls, True)
         if hits:
             self.kill()
+        #Hits all mobs
+        if pg.sprite.spritecollideany(self, self.game.all_walls):
+            self.kill()
+            return
+            
