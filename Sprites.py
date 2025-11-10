@@ -26,6 +26,7 @@ class Player(Sprite):
         #game.player_img_inv sets the image for the sprite 
         self.image_inv = game.player_img_inv
         self.rect = self.image.get_rect()
+        #gives the player sprite motion
         self.vel = vec(0,0)
         self.pos = vec(x,y) * TILESIZE[0]
         self.speed = 250
@@ -37,6 +38,7 @@ class Player(Sprite):
         self.flying = False
         self.last_update = 0
         self.jump_power = 100
+        self.facing = ""
     # def jump(self):
     #     hits = pg.sprite.collide(self, self.game.all_walls, False)
     #     self.rect.y += 1
@@ -78,6 +80,13 @@ class Player(Sprite):
             # self.rect.y -= self.speed
         if keys[pg.K_a]:
             self.vel.x = -self.speed*self.game.dt
+            self.dir = vec(-1,0)
+            if self.facing != "left":
+                self.facing = "left"
+                self.flipped_img = pg.transform.flip(self.image, True, False)
+                self.image = self.flipped_img 
+            if self.facing == "left":
+                self.flipped_img = False
             # self.rect.x -= self.speed
         if keys[pg.K_s]:
             self.vel.y = self.speed*self.game.dt
@@ -86,8 +95,12 @@ class Player(Sprite):
             self.vel.x = self.speed*self.game.dt
             # self.rect.x += self.speed
             #accouting for diagonal movement
-        if self.vel.x != 0 and self.vel.y != 0:
-            self.vel *= 0.7071
+            self.dir = vec(1,0)
+            if self.facing != "right":
+                self.facing = "right"
+                self.flipped_img = pg.transform.flip(self.image, True, False)
+            self.image = self.flipped_img
+        
     
     def collide_with_walls(self, dir):
         if dir == 'x':
@@ -183,6 +196,10 @@ class Player(Sprite):
         else:
             self.image = self.game.player_img
             print("ready")
+
+        if self.facing == "left":
+            self.flipped_img = pg.transform.flip(self.image, True, False)
+            self.image = self.flipped_img
         # print(self.cd.ready())    
         # if not self.cd.ready():
         #     self.image.fill(BLUE)

@@ -34,7 +34,8 @@ class Game:
       # loads image into memory when a new game is created. This goes into the images folder of the My_Game_Engine_Project 
       #This pulls the image to place for the sprite. Calls on folder where the image is located and imports it. 
       #Assings the sprite an image
-      self.player_img = pg.image.load(path.join(self.img_folder, 'U.S.S._Enterprise_A.png')).convert_alpha()
+      self.player_img = pg.image.load(path.join(self.img_folder, 'U.S.S._Enterprise_A_flipped.png.png')).convert_alpha()
+      self.player_img = pg.transform.scale(self.player_img,(110,50))
       self.player_img_inv = pg.image.load(path.join(self.img_folder, 'U.S.S._Enterprise_A.png')).convert_alpha()
       #pg.transform.scale allows rescaling specific imported images. In this case, for players, mobs, etc.
       self.player_img = pg.transform.scale(self.player_img,(110,50))
@@ -103,6 +104,7 @@ class Game:
         pg.quit()
 
     def events(self):
+        #Game behavior when user interacts 
         for event in pg.event.get():
             if event.type == pg.QUIT:
             #  print("this is happening")
@@ -129,9 +131,9 @@ class Game:
         self.all_sprites.draw(self.screen)
         self.screen.fill(WHITE)
         self.screen.blit(self.bg_img,(0,0))
-        self.draw_text(self.screen, str(self.player.health), 24, BLACK,100,100)
-        self.draw_text(self.screen, str(self.player.coins), 24, BLACK,400,100)
-        self.draw_text(self.screen, str(pg.time.get_ticks()//1000),24, BLACK, 500,100)
+        self.draw_text(self.screen, str(self.player.health), 24, WHITE,100,100)
+        self.draw_text(self.screen, str(self.player.coins), 24, WHITE,400,100)
+        self.draw_text(self.screen, str(pg.time.get_ticks()//1000),24, WHITE, 500,100)
         self.all_sprites.draw(self.screen)
         pg.display.flip()
 
@@ -140,3 +142,6 @@ if __name__ == "__main__":
     g = Game()
     g.new()
     g.run()
+
+#Sources: Mr. Cozart's course resources code 
+# 
