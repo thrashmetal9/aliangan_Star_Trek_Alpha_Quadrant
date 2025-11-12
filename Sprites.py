@@ -86,7 +86,7 @@ class Player(Sprite):
                 self.flipped_img = pg.transform.flip(self.image, True, False)
                 self.image = self.flipped_img 
             if self.facing == "left":
-                self.flipped_img = False
+                self.dir = vec(-1,0)
             # self.rect.x -= self.speed
         if keys[pg.K_s]:
             self.vel.y = self.speed*self.game.dt
@@ -141,7 +141,7 @@ class Player(Sprite):
                 self.vel.y = 0
                 self.rect.y = self.pos.y
                 
-
+    
     def collide_with_stuff(self, group, kill):
     #self is always important with every module as in this case, it relates to calling on collisions with the player
         hits = pg.sprite.spritecollide(self, group, kill)
@@ -180,6 +180,7 @@ class Player(Sprite):
             self.rect.y = self.pos.y
     
     def update(self):
+        # self.effects_trail()
         self.get_keys()
         # self.animate()
         self.pos += self.vel 
@@ -200,6 +201,9 @@ class Player(Sprite):
         if self.facing == "left":
             self.flipped_img = pg.transform.flip(self.image, True, False)
             self.image = self.flipped_img
+    # def effects_trail(self):
+    #     if self.effect_cd.ready():
+    #         EffectTrail(self.game, self.rect.x,self.rect.y)
         # print(self.cd.ready())    
         # if not self.cd.ready():
         #     self.image.fill(BLUE)
@@ -288,6 +292,52 @@ class Wall(Sprite):
      self.rect.x = self.pos.x
      self.rect.y = self.pos.y
 
+# class EffectTrail(Sprite):
+#     def __init__(self, game, x, y):
+#         self.game = game
+#         self.groups = game.all_sprites
+#         Sprite.__init__(self, self.groups)
+#         self.image = pg.Surface(TILESIZE, pg.SRCALPHA)
+#         self.alpha = 255
+#         self.image.fill((255,255,255,255))
+#         self.rect = self.image.get_rect()
+#         self.cd = Cooldown(10)
+#         self.rect.x = x
+#         self.rect.y = y
+#         # coin behavior
+#         self.scale_x = 32
+#         self.scale_y = 32
+#     def update(self):
+#         if self.alpha <= 10:
+#             self.kill()
+#         self.image.fill((255,255,255,self.alpha))
+        
+#         if self.cd.ready():
+#             self.scale_x -=1
+#             self.scale_y -=1
+#             print("I'm ready")
+#             self.alpha -= 50
+#             new_image = pg.transform.scale(self.image, (self.scale_x, self.scale_y))
+#             self.image = new_image 
+    
+
+
+class RotatingSprite(pg.sprite.Sprite):
+    def __init__(self,game,image,pivot_pos, radius, angle_offset=0, rotate_with_orbit=False):
+        super().__init__()
+        self.game = game 
+        self.groups = game.all_sprites
+        self.image = game.player_img
+        self.original_image = self.image.convert_alpha()
+        self.image = self.original_image
+
+
+        self.pivot = pg.Vector2(pivot_pos) 
+        self.radius = radius 
+        self.angle = angle_offset
+        self.rotate_with_orbit = rotate_with_orbit 
+
+        self.rect = self.image.get_rect()
 class Projectile(Sprite): 
     def __init__(self, game, x, y, dir):
         keys = pg.key.get_pressed()

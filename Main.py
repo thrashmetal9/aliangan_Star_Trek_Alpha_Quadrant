@@ -34,9 +34,9 @@ class Game:
       # loads image into memory when a new game is created. This goes into the images folder of the My_Game_Engine_Project 
       #This pulls the image to place for the sprite. Calls on folder where the image is located and imports it. 
       #Assings the sprite an image
-      self.player_img = pg.image.load(path.join(self.img_folder, 'U.S.S._Enterprise_A_flipped.png.png')).convert_alpha()
+      self.player_img = pg.image.load(path.join(self.img_folder, 'U.S.S._Enterprise_A.png')).convert_alpha()
       self.player_img = pg.transform.scale(self.player_img,(110,50))
-      self.player_img_inv = pg.image.load(path.join(self.img_folder, 'U.S.S._Enterprise_A.png')).convert_alpha()
+      self.player_img_inv = pg.image.load(path.join(self.img_folder, 'U.S.S._Enterprise_A_flipped.png.png')).convert_alpha()
       #pg.transform.scale allows rescaling specific imported images. In this case, for players, mobs, etc.
       self.player_img = pg.transform.scale(self.player_img,(110,50))
       self.mob_img = pg.image.load(path.join(self.img_folder, 'klingon_BOP.png.png')).convert_alpha()
