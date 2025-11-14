@@ -82,8 +82,8 @@ class Player(Sprite):
             self.dir = vec(0,-1)
             if self.facing != "up":
                 self.facing = "up"
-                self.image_up = pg.transform.flip(self.image_up, True, False)
-                self.image = self.image_up
+                self.flipped_img = pg.transform.rotate(self.image, 90)
+                self.image = self.flipped_img
             # self.rect.y -= self.speed
         if keys[pg.K_a]:
             self.vel.x = -self.speed*self.game.dt
@@ -97,10 +97,11 @@ class Player(Sprite):
             # self.rect.x -= self.speed
         if keys[pg.K_s]:
             # self.vel.y = self.speed*self.game.dt
+            self.vel.y = self.speed*self.game.dt
             self.dir = vec(0,1)
             if self.facing != "down":
                 self.facing = "down"
-                self.image_down = pg.transform.flip(self.image_down, True, False)
+                self.image_down = pg.transform.flip(self.image, True, False)
                 self.image = self.image_down
             # self.rect.y += self.speed
         if keys[pg.K_d]:
