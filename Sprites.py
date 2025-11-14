@@ -25,6 +25,8 @@ class Player(Sprite):
         self.image.set_colorkey(BLACK)
         #game.player_img_inv sets the image for the sprite 
         self.image_inv = game.player_img_inv
+        self.image_up = game.player_img_up
+        self.image_down = game.player_img_down
         self.rect = self.image.get_rect()
         #gives the player sprite motion
         self.vel = vec(0,0)
@@ -77,6 +79,11 @@ class Player(Sprite):
             # p = Projectile(self.game, self.rect.x, self.rect.y, self.dir)
         if keys[pg.K_w]:
             self.vel.y = -self.speed*self.game.dt
+            self.dir = vec(0,-1)
+            if self.facing != "up":
+                self.facing = "up"
+                self.image_up = pg.transform.flip(self.image_up, True, False)
+                self.image = self.image_up
             # self.rect.y -= self.speed
         if keys[pg.K_a]:
             self.vel.x = -self.speed*self.game.dt
@@ -84,22 +91,27 @@ class Player(Sprite):
             if self.facing != "left":
                 self.facing = "left"
                 self.flipped_img = pg.transform.flip(self.image, True, False)
-                self.image = self.flipped_img 
+                self.image = self.flipped_img
             if self.facing == "left":
                 self.dir = vec(-1,0)
             # self.rect.x -= self.speed
         if keys[pg.K_s]:
-            self.vel.y = self.speed*self.game.dt
+            # self.vel.y = self.speed*self.game.dt
+            self.dir = vec(0,1)
+            if self.facing != "down":
+                self.facing = "down"
+                self.image_down = pg.transform.flip(self.image_down, True, False)
+                self.image = self.image_down
             # self.rect.y += self.speed
         if keys[pg.K_d]:
             self.vel.x = self.speed*self.game.dt
-            # self.rect.x += self.speed
-            #accouting for diagonal movement
             self.dir = vec(1,0)
             if self.facing != "right":
                 self.facing = "right"
                 self.flipped_img = pg.transform.flip(self.image, True, False)
-            self.image = self.flipped_img
+                self.image = self.flipped_img 
+            if self.facing == "right":
+                self.dir = vec(1,0)
         
     
     def collide_with_walls(self, dir):
@@ -322,22 +334,22 @@ class Wall(Sprite):
     
 
 
-class RotatingSprite(pg.sprite.Sprite):
-    def __init__(self,game,image,pivot_pos, radius, angle_offset=0, rotate_with_orbit=False):
-        super().__init__()
-        self.game = game 
-        self.groups = game.all_sprites
-        self.image = game.player_img
-        self.original_image = self.image.convert_alpha()
-        self.image = self.original_image
+# class RotatingSprite(pg.sprite.Sprite):
+#     def __init__(self,game,image,pivot_pos, radius, angle_offset=0, rotate_with_orbit=False):
+#         super().__init__()
+#         self.game = game 
+#         self.groups = game.all_sprites
+#         self.image = game.player_img
+#         self.original_image = self.image.convert_alpha()
+#         self.image = self.original_image
 
 
-        self.pivot = pg.Vector2(pivot_pos) 
-        self.radius = radius 
-        self.angle = angle_offset
-        self.rotate_with_orbit = rotate_with_orbit 
+#         self.pivot = pg.Vector2(pivot_pos) 
+#         self.radius = radius 
+#         self.angle = angle_offset
+#         self.rotate_with_orbit = rotate_with_orbit 
 
-        self.rect = self.image.get_rect()
+#         self.rect = self.image.get_rect()
 class Projectile(Sprite): 
     def __init__(self, game, x, y, dir):
         keys = pg.key.get_pressed()

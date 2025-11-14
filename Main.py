@@ -37,8 +37,12 @@ class Game:
       self.player_img = pg.image.load(path.join(self.img_folder, 'U.S.S._Enterprise_A.png')).convert_alpha()
       self.player_img = pg.transform.scale(self.player_img,(110,50))
       self.player_img_inv = pg.image.load(path.join(self.img_folder, 'U.S.S._Enterprise_A_flipped.png.png')).convert_alpha()
+      self.player_img = pg.transform.scale(self.player_img, (110,50))
+      self.player_img_up = pg.image.load(path.join(self.img_folder, 'U.S.S._Enterprise_A_UP.png')).convert_alpha()
       #pg.transform.scale allows rescaling specific imported images. In this case, for players, mobs, etc.
       self.player_img = pg.transform.scale(self.player_img,(110,50))
+      self.player_img_down = pg.image.load(path.join(self.img_folder, 'U.S.S._Enterprise_A_DOWN.png')).convert_alpha()
+      self.player_img = pg.transform.scale(self.player_img, (110,50))
       self.mob_img = pg.image.load(path.join(self.img_folder, 'klingon_BOP.png.png')).convert_alpha()
       self.mob_img_inv = pg.image.load(path.join(self.img_folder,'klingon_BOP.png.png')).convert_alpha()
       #loads image from the images folder and assigning it to become the background image for the game
