@@ -256,8 +256,9 @@ class Mob(Sprite):
         # self.vel = vec(choice([1,1]), choice([-1,1]))
         self.vel = vec(0,0)
         self.pos = vec(x,y)*TILESIZE[0]
+        self.health = 100 
         self.speed = 5
-        print(self.pos)
+        self.cd = Cooldown(1000)
     def collide_with_walls(self, dir):
         if dir == 'x':
             hits = pg.sprite.spritecollide(self,self.game.all_walls, False)
@@ -284,13 +285,14 @@ class Mob(Sprite):
                 self.vel.y *= choice([-1,1])
     def movement(self):
         if self.pos.x > 900:
-            self.vel = vec(0,1)
-            if self.pos.y > 650:
+             self.vel = vec(0,1)
+             if self.pos.y > 650:
                 self.vel = vec(-1,0)
-        if self.pos.x < 100:
+        if self.pos.x < 100 :
             self.vel = vec(0,-1)
             if self.pos.y < 100:
                 self.vel = vec(1,0)
+        
     def update(self):
         self.movement()
         # if self.health <= 0:
@@ -304,11 +306,12 @@ class Mob(Sprite):
         # else:
         #     self.vel.y = -1
             # print("I don't need to chase the player x")
-        # self.pos += self.vel * self.speed
-        # self.rect.x = self.pos.x
-        # self.collide_with_walls('x')
-        # self.rect.y = self.pos.y
-        # self.collide_with_walls('y')
+        self.pos += self.vel * self.speed
+        self.rect.x = self.pos.x
+        self.collide_with_walls('x')
+        self.rect.y = self.pos.y
+        self.collide_with_walls('y')
+        # self.collide_with_walls(self.game.all_weapons, False)
    
         
 class Wall(Sprite):
