@@ -23,6 +23,7 @@ class Game:
       self.screen = pg.display.set_mode((WIDTH, HEIGHT))
       pg.display.set_caption("Aiden Aliangan's awesome game!!!!!")
       self.playing = True
+      self.running = True 
       #set up a game folder directory path using the current folder containing THIS file 
 #Gives the Geme class a map property which uses the Map class to parse the level2.txt file 
     def load_data(self):
@@ -144,6 +145,7 @@ class Game:
 if __name__ == "__main__":
 #    creating an instance or instantiating the Game class
     g = Game()
+    g. show_start_screen()
     g.new()
     g.run()
 

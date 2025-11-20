@@ -254,6 +254,7 @@ class Mob(Sprite):
         self.rect = self.image.get_rect()
         #Gives the mob movement 
         # self.vel = vec(choice([1,1]), choice([-1,1]))
+        self.vel = vec(0,0)
         self.pos = vec(x,y)*TILESIZE[0]
         self.speed = 5
         print(self.pos)
@@ -292,6 +293,8 @@ class Mob(Sprite):
                 self.vel = vec(1,0)
     def update(self):
         self.movement()
+        # if self.health <= 0:
+        #     self.kill()
         # if self.game.player.pos.x > self.pos.x:
         #     self.vel.x = 1
         # else:
@@ -301,11 +304,11 @@ class Mob(Sprite):
         # else:
         #     self.vel.y = -1
             # print("I don't need to chase the player x")
-        self.pos += self.vel * self.speed
-        self.rect.x = self.pos.x
-        self.collide_with_walls('x')
-        self.rect.y = self.pos.y
-        self.collide_with_walls('y')
+        # self.pos += self.vel * self.speed
+        # self.rect.x = self.pos.x
+        # self.collide_with_walls('x')
+        # self.rect.y = self.pos.y
+        # self.collide_with_walls('y')
    
         
 class Wall(Sprite):
