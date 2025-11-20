@@ -281,15 +281,19 @@ class Mob(Sprite):
                     self.pos.y = hits[0].rect.bottom 
                 self.rect.y = self.pos.y
                 self.vel.y *= choice([-1,1])
-    def movement(self):
-        if self.pos.x > 900:
+    def x_movement(self):
+        if self.pos.x < 500: 
             self.vel = vec(0,1)
-            if self.pos.y > 650:
-                self.vel = vec(-1,0)
-        if self.pos.x < 100:
+        elif self.pos.x < 50: 
             self.vel = vec(0,-1)
-            if self.pos.y < 100:
-                self.vel = vec(1,0)
+    def y_movement(self):
+        if self.pos.y > 500:
+            self.vel = vec(0,1)
+        elif self.pos.y < 150:
+            self.vel = vec(1,0)
+    def movement(self):
+        if self.pos.x > 50 or self.pos.x < 500:
+            self.y_movement 
     def update(self):
         self.movement()
         # if self.game.player.pos.x > self.pos.x:
@@ -306,7 +310,11 @@ class Mob(Sprite):
         self.collide_with_walls('x')
         self.rect.y = self.pos.y
         self.collide_with_walls('y')
-   
+    def movement(self):
+        if self.pos.x > 900:
+            self.vel = vec(0,1)
+            if self.pos.y > 650:
+                self.vel = vec(-1,0)
         
 class Wall(Sprite):
     def __init__(self,game, x, y, state):

@@ -77,7 +77,6 @@ class Player(Sprite):
             self.jump()
         # if keys[pg.K_e]:
             # p = Projectile(self.game, self.rect.x, self.rect.y, self.dir)
-        #Used Chat GPT to help with the transform flip vertically. 
         if keys[pg.K_w]:
             self.vel.y = -self.speed*self.game.dt
             self.dir = vec(0,-1)
@@ -96,17 +95,14 @@ class Player(Sprite):
             if self.facing == "left":
                 self.dir = vec(-1,0)
             # self.rect.x -= self.speed
-            #Used Chat GPT to help with flipping image principles vertically. 
         if keys[pg.K_s]:
             # self.vel.y = self.speed*self.game.dt
             self.vel.y = self.speed*self.game.dt
             self.dir = vec(0,1)
             if self.facing != "down":
                 self.facing = "down"
-                self.image_down = pg.transform.rotate(self.image, 270)
-                #pg.transform.rotate rotates the image and 270 is the parameter for the number of degrees to rotate the image
+                self.image_down = pg.transform.flip(self.image, True, False)
                 self.image = self.image_down
-                #self.image= self.image_down is the new condition or the new variable to self.image once condition is met
             # self.rect.y += self.speed
         if keys[pg.K_d]:
             self.vel.x = self.speed*self.game.dt
@@ -214,16 +210,9 @@ class Player(Sprite):
         else:
             self.image = self.game.player_img
             print("ready")
-# Player behavior regarding flipping the image for the sprite
-# This is my own work this time  
+
         if self.facing == "left":
             self.flipped_img = pg.transform.flip(self.image, True, False)
-            self.image = self.flipped_img
-        if self.facing == "up":
-            self.flipped_img = pg.transform.rotate(self.image, 90)
-            self.image = self.flipped_img
-        if self.facing == "down":
-            self.flipped_img = pg.transform.rotate(self.image, 270)
             self.image = self.flipped_img
     # def effects_trail(self):
     #     if self.effect_cd.ready():
@@ -253,7 +242,7 @@ class Mob(Sprite):
         self.image_inv = game.mob_img_inv
         self.rect = self.image.get_rect()
         #Gives the mob movement 
-        # self.vel = vec(choice([1,1]), choice([-1,1]))
+        self.vel = vec(choice([1,1]), choice([-1,1]))
         self.pos = vec(x,y)*TILESIZE[0]
         self.speed = 5
         print(self.pos)
@@ -281,33 +270,21 @@ class Mob(Sprite):
                     self.pos.y = hits[0].rect.bottom 
                 self.rect.y = self.pos.y
                 self.vel.y *= choice([-1,1])
-    def movement(self):
-        if self.pos.x > 900:
-            self.vel = vec(0,1)
-            if self.pos.y > 650:
-                self.vel = vec(-1,0)
-        if self.pos.x < 100:
-            self.vel = vec(0,-1)
-            if self.pos.y < 100:
-                self.vel = vec(1,0)
     def update(self):
-        self.movement()
-        # if self.game.player.pos.x > self.pos.x:
-        #     self.vel.x = 1
-        # else:
-        #     self.vel.x = -1
-        # if self.game.player.pos.y > self.pos.y:
-        #     self.vel.y = 1
-        # else:
-        #     self.vel.y = -1
+        if self.game.player.pos.x > self.pos.x:
+            self.vel.x = 1
+        else:
+            self.vel.x = -1
+        if self.game.player.pos.y > self.pos.y:
+            self.vel.y = 1
+        else:
+            self.vel.y = -1
             # print("I don't need to chase the player x")
         self.pos += self.vel * self.speed
         self.rect.x = self.pos.x
         self.collide_with_walls('x')
         self.rect.y = self.pos.y
         self.collide_with_walls('y')
-   
-        
 class Wall(Sprite):
     def __init__(self,game, x, y, state):
         self.game = game
@@ -405,4 +382,3 @@ class Projectile(Sprite):
         if pg.sprite.spritecollideany(self, self.game.all_walls):
             self.kill()
             return
-            
