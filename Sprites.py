@@ -247,6 +247,7 @@ class Mob(Sprite):
         self.image = pg.Surface((32, 32))
         #Loads the image assigned to the mob - defining the physical attributes or properties of the mob
         self.image = game.mob_img
+        self.fade = 255
         # self.image.fill(RED)
         #Gets rid of background image and also any part of the mob that is black
         self.image.set_colorkey(BLACK)
@@ -260,29 +261,30 @@ class Mob(Sprite):
         self.speed = 5
         self.cd = Cooldown(1000)
     def collide_with_walls(self, dir):
-        if dir == 'x':
-            hits = pg.sprite.spritecollide(self,self.game.all_walls, False)
-            if hits:
-                if self.vel.x > 0:
-                    # hits [0] is the first wall hit or whatever we had just hit
-                    self.pos.x = hits[0].rect.left - self.rect.width
-                    #position would be subracted by the width after colliding with wall
-                if self.vel.x < 0:
-                    self.pos.x = hits[0].rect.right
-                # self.vel.x = 0
-                self.rect.x = self.pos.x
-                self.vel.x *= choice([-1,1])
+        self.vel.y *= choice([-1,1])
+        # if dir == 'x':
+        #     hits = pg.sprite.spritecollide(self,self.game.all_walls, False)
+        #     if hits:
+        #         if self.vel.x > 0:
+        #             # hits [0] is the first wall hit or whatever we had just hit
+        #             self.pos.x = hits[0].rect.left - self.rect.width
+        #             #position would be subracted by the width after colliding with wall
+        #         if self.vel.x < 0:
+        #             self.pos.x = hits[0].rect.right
+        #         # self.vel.x = 0
+        #         self.rect.x = self.pos.x
+        #         self.vel.x *= choice([-1,1])
                 #choice randomly picks the integer from the two given values 
                 #Lists and it will pick something from the list
-        if dir == 'y':
-            hits = pg.sprite.spritecollide(self,self.game.all_walls, False)
-            if hits:
-                if self.vel.y > 0:
-                    self.pos.y = hits[0].rect.top - self.rect.height
-                if self.rect.y < 0:
-                    self.pos.y = hits[0].rect.bottom 
-                self.rect.y = self.pos.y
-                self.vel.y *= choice([-1,1])
+        # if dir == 'y':
+        #     hits = pg.sprite.spritecollide(self,self.game.all_walls, False)
+        #     if hits:
+        #         if self.vel.y > 0:
+        #             self.pos.y = hits[0].rect.top - self.rect.height
+        #         if self.rect.y < 0:
+        #             self.pos.y = hits[0].rect.bottom 
+        #         self.rect.y = self.pos.y
+        #         self.vel.y *= choice([-1,1])
     def movement(self):
         if self.pos.x > 900:
              self.vel = vec(0,1)
