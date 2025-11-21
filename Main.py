@@ -45,7 +45,9 @@ class Game:
       self.player_img_down = pg.image.load(path.join(self.img_folder, 'U.S.S._Enterprise_A_DOWN.png')).convert_alpha()
       self.player_img = pg.transform.scale(self.player_img, (110,50))
       self.mob_img = pg.image.load(path.join(self.img_folder, 'klingon_BOP.png.png')).convert_alpha()
-      self.mob_img_inv = pg.image.load(path.join(self.img_folder,'klingon_BOP.png.png')).convert_alpha()
+      self.mob_img_inv = pg.image.load(path.join(self.img_folder,'klingon_BOP_RIGHT.png')).convert_alpha()
+      self.mob_img_down = pg.image.load(path.join(self.img_folder,'klingon_BOP_DOWN.png')).convert_alpha()
+      self.mob_img_left = pg.image.load(path.join(self.img_folder,'klingon_BOP_LEFT.png')).convert_alpha()
       #loads image from the images folder and assigning it to become the background image for the game
       self.bg_img = pg.image.load(path.join(self.img_folder,'Space_Wallpaper.png')).convert_alpha()
       self.bg_img = pg.transform.scale(self.bg_img,(WIDTH, HEIGHT))

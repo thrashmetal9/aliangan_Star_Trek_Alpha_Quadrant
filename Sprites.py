@@ -252,6 +252,8 @@ class Mob(Sprite):
         #Gets rid of background image and also any part of the mob that is black
         self.image.set_colorkey(BLACK)
         self.image_inv = game.mob_img_inv
+        self.image_down = game.mob_img_down
+        self.rect = self.image.get_rect()
         self.rect = self.image.get_rect()
         #Gives the mob movement 
         # self.vel = vec(choice([1,1]), choice([-1,1]))
@@ -260,6 +262,7 @@ class Mob(Sprite):
         self.health = 100 
         self.speed = 5
         self.cd = Cooldown(1000)
+        self.facing = ""
     def collide_with_walls(self, dir):
         self.vel.y *= choice([-1,1])
         # if dir == 'x':
@@ -287,13 +290,29 @@ class Mob(Sprite):
         #         self.vel.y *= choice([-1,1])
     def movement(self):
         if self.pos.x > 900:
-             self.vel = vec(0,1)
-             if self.pos.y > 650:
+            self.vel = vec(0, 1)
+            self.facing = "down"
+            self.image_down = pg.transform.rotate(self.image, 180)
+            if self.pos.y > 650:
                 self.vel = vec(-1,0)
+                self.facing = "left"
+                self.flipped_img = pg.transform.rotate(self.image, 270)
+                self.image = self.flipped_img
         if self.pos.x < 100 :
-            self.vel = vec(0,-1)
+            self.vel = vec(0, -1)
+            self.facing != "up"
+            self.facing = "up"
+            self.image = self.image
+            
+                #pg.transform.rotate rotates the image and 270 is the parameter for the number of degrees to rotate the image
+            self.image = self.image_down
+           
             if self.pos.y < 100:
                 self.vel = vec(1,0)
+                self.facing = "right"
+                self.flipped_img = pg.transform.rotate(self.image, 90)
+                self.image = self.flipped_img 
+                
         
     def update(self):
         self.movement()
@@ -314,6 +333,21 @@ class Mob(Sprite):
         self.rect.y = self.pos.y
         self.collide_with_walls('y')
         # self.collide_with_walls(self.game.all_weapons, False)
+        if self.pos.x > 900:
+            self.facing == "up"
+            self.image = self.image
+        if self.pos.y == 100:
+            self.facing == "right"
+            self.flipped_img = pg.transform.rotate(self.image, 90)
+            self.image = self.flipped_img 
+        if self.pos.x < 100 :
+            self.facing == "down"
+            self.flipped_img = pg.transform.rotate(self.image, 180)
+            self.image = self.flipped_img
+        if self.pos.y > 650:
+            self.facing == "left"
+            self.flipped_img = pg.transform.rotate(self.image, 270)
+            self.image = self.flipped_img
    
         
 class Wall(Sprite):
