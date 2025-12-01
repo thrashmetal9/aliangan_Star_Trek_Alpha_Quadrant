@@ -289,29 +289,55 @@ class Mob(Sprite):
         #         self.rect.y = self.pos.y
         #         self.vel.y *= choice([-1,1])
     def movement(self):
+        self.image = self.image
         if self.pos.x > 900:
             self.vel = vec(0, 1)
-            self.facing = "down"
-            self.image_down = pg.transform.rotate(self.image, 180)
+            if self.facing != "down":
+                self.facing = "down"
+                self.image_down = pg.transform.rotate(self.image, 180)
+                self.image = self.image_down
             if self.pos.y > 650:
                 self.vel = vec(-1,0)
-                self.facing = "left"
-                self.flipped_img = pg.transform.rotate(self.image, 270)
-                self.image = self.flipped_img
+                if self.facing != "left":
+                    self.facing = "left"
+                    self.rotated_img = pg.transform.rotate(self.image, 270)
+                    self.image = self.rotated_img
         if self.pos.x < 100 :
             self.vel = vec(0, -1)
-            self.facing != "up"
-            self.facing = "up"
-            self.image = self.image
-            
-                #pg.transform.rotate rotates the image and 270 is the parameter for the number of degrees to rotate the image
-            self.image = self.image_down
-           
+            if self.facing != "up":
+                self.facing = "up"
+                self.image = self.image
             if self.pos.y < 100:
                 self.vel = vec(1,0)
-                self.facing = "right"
-                self.flipped_img = pg.transform.rotate(self.image, 90)
-                self.image = self.flipped_img 
+                if self.facing != "right": 
+                    self.facing = "right"
+                    self.flipped_img = pg.transform.rotate(self.image, 90)
+                    self.image = self.flipped_img 
+    # def movement(self):
+    #     if self.pos.x > 845:
+    #         self.vel = vec(0, 1)
+    #         if self.facing != "down":
+    #             self.facing = "down"
+    #             if self.pos.x > 100: 
+    #                 self.image_down = pg.transform.rotate(self.image, 90)
+    #                 self.image = self.image_down
+    #         if self.pos.y < 600 :
+    #             self.vel = vec(-1,0)
+    #             if self.facing != "left":
+    #                 self.facing = "left"
+    #                 self.flipped_img = pg.transform.rotate(self.image, 90)
+    #                 self.image = self.flipped_img
+    #     if self.pos.x < 100 :
+    #         self.vel = vec(0, -1)
+    #         if self.facing != "up":
+    #             self.facing = "up"
+    #             self.image = self.image      
+    #     if self.pos.y < 100 and self.pos.x < 100:
+    #         self.vel = vec(1,0)
+    #         if self.facing != "right": 
+    #             self.facing = "right"
+    #             self.flipped_img = pg.transform.rotate(self.image,90)
+    #             self.image = self.flipped_img 
                 
         
     def update(self):
@@ -332,23 +358,52 @@ class Mob(Sprite):
         self.collide_with_walls('x')
         self.rect.y = self.pos.y
         self.collide_with_walls('y')
+        self.image = self.image_down
         # self.collide_with_walls(self.game.all_weapons, False)
-        if self.pos.x > 900:
-            self.facing == "up"
-            self.image = self.image
-        if self.pos.y == 100:
-            self.facing == "right"
-            self.flipped_img = pg.transform.rotate(self.image, 90)
-            self.image = self.flipped_img 
-        if self.pos.x < 100 :
-            self.facing == "down"
-            self.flipped_img = pg.transform.rotate(self.image, 180)
-            self.image = self.flipped_img
+        if self.pos.x > 900 :
+            if self.image == self.image: 
+                self.facing == "down"
+                self.image_down = pg.transform.rotate(self.image, 180)
+                self.image = self.image_down 
+                self.image != self.image
         if self.pos.y > 650:
             self.facing == "left"
-            self.flipped_img = pg.transform.rotate(self.image, 270)
-            self.image = self.flipped_img
-   
+            self.image_left = pg.transform.rotate(self.image, 270)
+            self.image = self.image_left
+        if self.pos.x < 900 and self.pos.y < 100:
+            if self.pos.y < 100:
+                self.facing == "right"
+                self.image_right = pg.transform.rotate(self.image, 90)
+                self.image = self.image_right
+           
+        
+       
+        # if self.pos.x > 845:
+        #     if self.facing == "down":
+        #         if self.pos.x != 100:
+        #             self.flipped_img = pg.transform.rotate(self.image, 90)
+        #             self.image = self.flipped_img
+        #         self.vel = vec(0,1)
+        #     if self.pos.y < 600:
+        #         if self.facing == "left":
+        #             self.flipped_img = pg.transform.rotate(self.image,90)
+        #             self.vel = vec(-1,0)
+                   
+        # if self.pos.x < 100 :
+        #     if self.facing == "up":
+        #         self.image = self.image 
+        #     if self.pos.y < 100:
+        #         if self.facing == "right":
+        #             self.flipped_img = pg.transform.rotate(self.image, 90)
+        #             self.image = self.flipped_img
+
+        
+     
+        
+        
+
+      
+    
         
 class Wall(Sprite):
     def __init__(self,game, x, y, state):
