@@ -262,9 +262,9 @@ class Mob(Sprite):
         self.health = 100 
         self.speed = 5
         self.cd = Cooldown(1000)
-        self.facing = ""
-    def collide_with_walls(self, dir):
-        self.vel.y *= choice([-1,1])
+        self.facing = "up"
+    # def collide_with_walls(self, dir):
+    #     self.vel.y *= choice([-1,1])
         # if dir == 'x':
         #     hits = pg.sprite.spritecollide(self,self.game.all_walls, False)
         #     if hits:
@@ -288,31 +288,40 @@ class Mob(Sprite):
         #             self.pos.y = hits[0].rect.bottom 
         #         self.rect.y = self.pos.y
         #         self.vel.y *= choice([-1,1])
+   
     def movement(self):
         self.image = self.image
         if self.pos.x > 845:
             self.vel = vec(0, 1)
-            if self.facing != "down":
-                self.facing = "down"
-                self.image_down = pg.transform.rotate(self.image, 180)
-                self.image = self.image_down
             if self.pos.y > 600:
                 self.vel = vec(-1,0)
-                if self.facing != "left":
-                    self.facing = "left"
-                    self.rotated_img = pg.transform.rotate(self.image, 270)
-                    self.image = self.rotated_img
         if self.pos.x < 100 :
             self.vel = vec(0, -1)
-            if self.facing != "up":
-                self.facing = "up"
-                self.image = self.image
             if self.pos.y < 100:
                 self.vel = vec(1,0)
-                if self.facing != "right": 
-                    self.facing = "right"
-                    self.flipped_img = pg.transform.rotate(self.image, 90)
-                    self.image = self.flipped_img 
+
+    def check_dir(self):
+        if self.vel.y > 0:
+            if self.facing != "down":
+                self.facing = "down"
+                self.image_down = pg.transform.rotate(self.image,-90)
+                self.image = self.image_down
+        if self.vel.x > 0:
+            if self.facing != "right":
+                self.facing = "right"
+                self.image_right = pg.transform.rotate(self.image,-90)
+                self.image = self.image_right
+        elif self.vel.x < 0:
+            if self.facing != "left":
+                self.facing = "left"
+                self.image_left = pg.transform.rotate(self.image, -90)
+                self.image = self.image_left
+        elif self.vel.y < 0: 
+            if self.facing != "up":
+                self.facing = "up"
+                self.image_up = pg.transform.rotate(self.image, -90)
+                self.image = self.image_up
+                
     # def movement(self):
     #     if self.pos.x > 845:
     #         self.vel = vec(0, 1)
@@ -341,40 +350,31 @@ class Mob(Sprite):
                 
         
     def update(self):
+        self.check_dir()
         self.movement()
         # if self.health <= 0:
         #     self.kill()
-        # if self.game.player.pos.x > self.pos.x:
-        #     self.vel.x = 1
-        # else:
-        #     self.vel.x = -1
-        # if self.game.player.pos.y > self.pos.y:
-        #     self.vel.y = 1
-        # else:
-        #     self.vel.y = -1
-            # print("I don't need to chase the player x")
         self.pos += self.vel * self.speed
         self.rect.x = self.pos.x
-        self.collide_with_walls('x')
         self.rect.y = self.pos.y
-        self.collide_with_walls('y')
-        self.image = self.image_down
+        
+
         # self.collide_with_walls(self.game.all_weapons, False)
-        if self.pos.x > 845 :
-            if self.image == self.image: 
-                self.facing == "down"
-                self.image_down = pg.transform.rotate(self.image, 180)
-                self.image = self.image_down 
-                self.image != self.image
-        if self.pos.y > 600:
-            self.facing == "left"
-            self.image_left = pg.transform.rotate(self.image, 270)
-            self.image = self.image_left
-        if self.pos.x < 845 and self.pos.y < 100:
-            if self.pos.y < 100:
-                self.facing == "right"
-                self.image_right = pg.transform.rotate(self.image, 90)
-                self.image = self.image_right
+        # if self.pos.x > 845 :
+        #     if self.image == self.image: 
+        #         self.facing == "down"
+        #         self.image_down = pg.transform.rotate(self.image, 180)
+        #         self.image = self.image_down 
+        #         self.image != self.image
+        # if self.pos.y > 600:
+        #     self.facing == "left"
+        #     self.image_left = pg.transform.rotate(self.image, 270)
+        #     self.image = self.image_left
+        # if self.pos.x < 845 and self.pos.y < 100:
+        #     if self.pos.y < 100:
+        #         self.facing == "right"
+        #         self.image_right = pg.transform.rotate(self.image, 90)
+        #         self.image = self.image_right
            
         
        
