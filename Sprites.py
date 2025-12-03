@@ -290,13 +290,13 @@ class Mob(Sprite):
         #         self.vel.y *= choice([-1,1])
     def movement(self):
         self.image = self.image
-        if self.pos.x > 900:
+        if self.pos.x > 845:
             self.vel = vec(0, 1)
             if self.facing != "down":
                 self.facing = "down"
                 self.image_down = pg.transform.rotate(self.image, 180)
                 self.image = self.image_down
-            if self.pos.y > 650:
+            if self.pos.y > 600:
                 self.vel = vec(-1,0)
                 if self.facing != "left":
                     self.facing = "left"
@@ -360,17 +360,17 @@ class Mob(Sprite):
         self.collide_with_walls('y')
         self.image = self.image_down
         # self.collide_with_walls(self.game.all_weapons, False)
-        if self.pos.x > 900 :
+        if self.pos.x > 845 :
             if self.image == self.image: 
                 self.facing == "down"
                 self.image_down = pg.transform.rotate(self.image, 180)
                 self.image = self.image_down 
                 self.image != self.image
-        if self.pos.y > 650:
+        if self.pos.y > 600:
             self.facing == "left"
             self.image_left = pg.transform.rotate(self.image, 270)
             self.image = self.image_left
-        if self.pos.x < 900 and self.pos.y < 100:
+        if self.pos.x < 845 and self.pos.y < 100:
             if self.pos.y < 100:
                 self.facing == "right"
                 self.image_right = pg.transform.rotate(self.image, 90)
