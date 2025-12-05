@@ -8,20 +8,7 @@ from random import choice
 from os import path
 vec = pg.math.Vector2
 
-#Design Goals:
-#Design an interactive Player Sprite that can kill mobs
 
-#Mechanical Goals: 
-#Players can move ship on x and y axis 
-#Players can only make ranged attacks
-#Sound effects for Music, lasers being fired, and when ships get hit 
-#Design a path system for Mob 
-#Use an image for Sprites for Player and Mob 
-
-#Rules:
-#Players cannot collide with the end of the map or the game ends
-#Players also cannot collide with an enemy mob or else health is lost 
-#Players cannot fire upon their own base as the objective is to defend 
 
 
 #Initiating Player Class / Super Class as it is able to create surface, get rectangle 
@@ -94,7 +81,8 @@ class Player(Sprite):
         self.vel = vec(0,0)
         keys = pg.key.get_pressed()
         if keys[pg.K_SPACE]: 
-            self.jump()
+            print(self.rect.x)
+            p = Projectile(self.game, self.rect.x, self.rect.y, self.dir)
         # if keys[pg.K_e]:
             # p = Projectile(self.game, self.rect.x, self.rect.y, self.dir)
         #Used Chat GPT to help with the transform flip vertically. 
@@ -379,8 +367,8 @@ class Mob(Sprite):
     def update(self):
         self.check_dir()
         self.movement()
-        # if self.health <= 0:
-        #     self.kill()
+        if self.health <= 0:
+            self.kill()
         self.pos += self.vel * self.speed
         self.rect.x = self.pos.x
         self.rect.y = self.pos.y
@@ -518,6 +506,7 @@ class Projectile(Sprite):
         #     self.vel = vec(0,-1)
         #     self.pos = vec(x,y)
         #     self.speed = 10
+    
     def update(self):
         self.pos += self.vel * self.speed
         self.rect.x = self.pos.x

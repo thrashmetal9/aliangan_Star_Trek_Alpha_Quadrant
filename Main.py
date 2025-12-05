@@ -3,13 +3,20 @@
 #Computer Programming / Period: 2
 # October 25, 2025
 
-#Goals of the Game:
-#Create a game where player must defend base from enemy mobs 
-#Be able to Kill Mobs with Projectiles 
+#Design Goals:
+#Design an interactive Player Sprite that can kill mobs
 
-#Rules: 
-#If player collides with enemy mob, game is over
-#If player reaches the border of the map, game is over 
+#Mechanical Goals: 
+#Players can move ship on x and y axis 
+#Players can only make ranged attacks
+#Sound effects for Music, lasers being fired, and when ships get hit 
+#Design a path system for Mob 
+#Use an image for Sprites for Player and Mob 
+
+#Rules:
+#Players cannot collide with the end of the map or the game ends
+#Players also cannot collide with an enemy mob or else health is lost 
+#Players cannot fire upon their own base as the objective is to defend 
 
 
 import math
