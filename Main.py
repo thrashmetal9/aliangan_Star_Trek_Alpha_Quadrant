@@ -3,7 +3,13 @@
 #Computer Programming / Period: 2
 # October 25, 2025
 
-#yay I can use github from VS CODE!
+#Goals of the Game:
+#Create a game where player must defend base from enemy mobs 
+#Be able to Kill Mobs with Projectiles 
+
+#Rules: 
+#If player collides with enemy mob, game is over
+#If player reaches the border of the map, game is over 
 
 
 import math

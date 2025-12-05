@@ -8,8 +8,25 @@ from random import choice
 from os import path
 vec = pg.math.Vector2
 
-#Initiating Player Class / Super Class as it is able to create surface, get ractangle 
+#Design Goals:
+#Design an interactive Player Sprite that can kill mobs
+
+#Mechanical Goals: 
+#Players can move ship on x and y axis 
+#Players can only make ranged attacks
+#Sound effects for Music, lasers being fired, and when ships get hit 
+#Design a path system for Mob 
+#Use an image for Sprites for Player and Mob 
+
+#Rules:
+#Players cannot collide with the end of the map or the game ends
+#Players also cannot collide with an enemy mob or else health is lost 
+#Players cannot fire upon their own base as the objective is to defend 
+
+
+#Initiating Player Class / Super Class as it is able to create surface, get rectangle 
 #Sprite is a visual element on the spring
+#Defining Properties for the Player Sprite 
 class Player(Sprite):
     def __init__(self, game, x, y):
         Sprite.__init__(self)
@@ -24,6 +41,8 @@ class Player(Sprite):
         #Set_Color key gets rid of the background for the imported image
         self.image.set_colorkey(BLACK)
         #game.player_img_inv sets the image for the sprite 
+        #Load of images imported into the Sprites file from Main
+        #Use for Transform Flip / Extra detail for when players control the ship, the image can be rotated
         self.image_inv = game.player_img_inv
         self.image_up = game.player_img_up
         self.image_down = game.player_img_down
@@ -70,6 +89,7 @@ class Player(Sprite):
 
 #Using if statements to determine specific actions when specific keys are pressed. Specifically, the code aims to 
 #target WASD keys 
+#Allow players to move ship along the x or y axis 
     def get_keys(self):
         self.vel = vec(0,0)
         keys = pg.key.get_pressed()
@@ -86,6 +106,8 @@ class Player(Sprite):
                 self.flipped_img = pg.transform.rotate(self.image, 90)
                 self.image = self.flipped_img
             # self.rect.y -= self.speed
+            #pg.transform.rotate rotates the image of the player. 
+            #Supported by if states saying if a certain key of WASD is pressed, the image rotates to face a certain direction
         if keys[pg.K_a]:
             self.vel.x = -self.speed*self.game.dt
             self.dir = vec(-1,0)
@@ -195,7 +217,7 @@ class Player(Sprite):
             self.vel.y = 0
                 # # hits[0].vel.x = 0
             self.rect.y = self.pos.y
-    
+    #Defining behaior for the Player sprite 
     def update(self):
         # self.effects_trail()
         self.get_keys()
@@ -306,6 +328,8 @@ class Mob(Sprite):
                 self.facing = "down"
                 self.image_down = pg.transform.rotate(self.image,-90)
                 self.image = self.image_down
+            #rotates image clockwise to face a certain direction
+            #Position is essential as it determines when the image must rotate
         if self.vel.x > 0:
             if self.facing != "right":
                 self.facing = "right"
