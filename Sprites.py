@@ -107,7 +107,7 @@ class Player(Sprite):
                 self.image = self.flipped_img
             # self.rect.y -= self.speed
             #pg.transform.rotate rotates the image of the player. 
-            #Supported by if states saying if a certain key of WASD is pressed, the image rotates to face a certain direction
+            #Ensures if a certain key of WASD is pressed, the image rotates to face a certain direction
         if keys[pg.K_a]:
             self.vel.x = -self.speed*self.game.dt
             self.dir = vec(-1,0)
@@ -321,6 +321,8 @@ class Mob(Sprite):
             self.vel = vec(0, -1)
             if self.pos.y < 100:
                 self.vel = vec(1,0)
+    #Above is a define in which gives the mob velocity and trajectory.
+    #Trajectory is that the Mob takes a lap along the screen's primeter
 
     def check_dir(self):
         if self.vel.y > 0:
@@ -330,6 +332,7 @@ class Mob(Sprite):
                 self.image = self.image_down
             #rotates image clockwise to face a certain direction
             #Position is essential as it determines when the image must rotate
+            #Most importantly, ensures the mob is facing the right direction when a certain condition is met
         if self.vel.x > 0:
             if self.facing != "right":
                 self.facing = "right"

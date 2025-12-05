@@ -38,7 +38,8 @@ class Game:
       self.game_folder = path.dirname(__file__)
       self.img_folder = path.join(self.game_folder, 'images')
       self.map = Map(path.join(self.game_folder, 'level2.txt'))
-      # loads image into memory when a new game is created. This goes into the images folder of the My_Game_Engine_Project 
+      # loads image into memory when a new game is created. 
+      # This goes into the images folder of the My_Game_Engine_Project 
       #This pulls the image to place for the sprite. Calls on folder where the image is located and imports it. 
       #Assings the sprite an image
       self.player_img = pg.image.load(path.join(self.img_folder, 'U.S.S._Enterprise_A.png')).convert_alpha()
@@ -183,4 +184,5 @@ if __name__ == "__main__":
         g.run()
 
 #Sources: Mr. Cozart's course resources code 
-# 
+# ChatGPT
+# Mr.Cozart's Github Link 
