@@ -374,6 +374,24 @@ class Mob(Sprite):
         self.pos += self.vel * self.speed
         self.rect.x = self.pos.x
         self.rect.y = self.pos.y
+
+class Base(Sprite):
+    def __init__(self, game, x, y):
+        Sprite.__init__(self)
+        self.game = game
+        self.groups = game.all_sprites, game.all_mobs
+        self.image = pg.Surface((90,90))
+        self.image = game.base_img 
+        self.fade = 255
+        self.image.set_colorkey(BLACK)
+        self.rect = self.image.get_rect()
+        self.rect = self.image.get_rect()
+        self.vel = vec(0,0)
+        self.pos = vec(x,y)*TILESIZE[0]
+        self.cd = Cooldown(1000)
+    
+
+
         
 
         # self.collide_with_walls(self.game.all_weapons, False)
