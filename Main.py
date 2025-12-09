@@ -159,6 +159,8 @@ class Game:
         self.draw_text(self.screen, str(self.player.coins), 24, WHITE,400,100)
         self.draw_text(self.screen, str(pg.time.get_ticks()//1000),24, WHITE, 500,100)
         self.all_sprites.draw(self.screen)
+        draw_shield_bar(self.screen, 10, 10, self.player.health)
+        # draw_shield_bar(self.screen, 10, 10, self.mob.health)
         pg.display.flip()
     
     def wait_for_key(self):

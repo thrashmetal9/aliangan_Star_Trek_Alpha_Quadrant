@@ -11,6 +11,7 @@ vec = pg.math.Vector2
 
 
 
+
 #Initiating Player Class / Super Class as it is able to create surface, get rectangle 
 #Sprite is a visual element on the spring
 #Defining Properties for the Player Sprite 
@@ -205,6 +206,7 @@ class Player(Sprite):
             self.vel.y = 0
                 # # hits[0].vel.x = 0
             self.rect.y = self.pos.y
+    
     #Defining behaior for the Player sprite 
     def update(self):
         # self.effects_trail()
@@ -493,29 +495,26 @@ class Projectile(Sprite):
         self.groups = game.all_sprites, game.all_projectiles 
         Sprite.__init__(self, self.groups)
         self.game = game
-        self.image = pg.Surface((85, 16))
+        self.image = pg.Surface((42, 16))
         self.image.fill(RED)
         self.rect = self.image.get_rect()
         self.vel = dir
         self.pos = vec(x,y)
         self.rect.x = x
         self.rect.y = y
-        self.speed = 10
+        self.speed = 20
         # if keys[pg.K_i]:
         #     self.image = pg.Surface((32,85))
         #     self.vel = vec(0,-1)
         #     self.pos = vec(x,y)
         #     self.speed = 10
-    
     def update(self):
         self.pos += self.vel * self.speed
         self.rect.x = self.pos.x
         self.rect.y = self.pos.y
-        hits = pg.sprite.spritecollide(self, self.game.all_walls, True)
+        hits = pg.sprite.spritecollide(self, self.game.all_mobs, True)
         if hits:
             self.kill()
         #Hits all mobs
-        if pg.sprite.spritecollideany(self, self.game.all_walls):
-            self.kill()
-            return
+        
             
