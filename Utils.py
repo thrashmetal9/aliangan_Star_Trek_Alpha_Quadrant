@@ -33,7 +33,9 @@ def draw_shield_bar(surf, x, y, pct):
         pct = 0
     BAR_LENGTH = 100
     BAR_HEIGHT = 10
+    #This ensures that as the player's health decreases or increases, it affects how much of the bar is filled. 
     fill = (pct / 100) * BAR_LENGTH
+    #Properties of the health bar
     outline_rect = pg.Rect(x, y, BAR_LENGTH, BAR_HEIGHT)
     fill_rect = pg.Rect(x, y, fill, BAR_HEIGHT)
     pg.draw.rect(surf, GREEN, fill_rect)

@@ -513,10 +513,11 @@ class Projectile(Sprite):
         self.groups = game.all_sprites, game.all_projectiles 
         Sprite.__init__(self, self.groups)
         self.game = game
-        self.image = pg.Surface((42, 16))
+        self.image = pg.Surface((42, 8))
         self.image.fill(RED)
         self.rect = self.image.get_rect()
         self.vel = dir
+        #Ensures that the projectile travels in the same direction the player faces
         self.pos = vec(x,y)
         self.rect.x = x
         self.rect.y = y

@@ -66,7 +66,7 @@ class Game:
       self.bg_img = pg.image.load(path.join(self.img_folder,'Space_Wallpaper.png')).convert_alpha()
       self.bg_img = pg.transform.scale(self.bg_img,(WIDTH, HEIGHT))
       self.base_img = pg.image.load(path.join(self.img_folder, 'Star_Base.png')).convert_alpha()
-      self.base_img = pg.transform.scale(self.base_img,(90,90))
+      self.base_img = pg.transform.scale(self.base_img,(120,120))
 
     def new(self):
       # the sprite Group allows us to upate and draw sprite in grouped batches using imported files, etc.
@@ -110,11 +110,12 @@ class Game:
             elif tile == 'M':
                Mob(self,col,row)
             elif tile == 'S':
-                Base(self,col,row)
+                self.base = Base(self,col,row)
 
 #Passing Mob class into the class of game so that it has access to the game
 
       self.all_sprites.add(self.player)
+      self.all_sprites.add(self.base)
     #   self.all_sprites.add(self.mob)
       # self.all_sprites.add(self.all_mobs)
      
@@ -158,6 +159,7 @@ class Game:
             surface.blit(text_surface, text_rect)
 
     def draw(self):
+        #Draws or loads various simple elements to the game such as Health bars, background image, etc. 
         self.screen.fill(WHITE)
         self.all_sprites.draw(self.screen)
         self.screen.fill(WHITE)
