@@ -377,9 +377,9 @@ class Mob(Sprite):
 
 class Base(Sprite):
     def __init__(self, game, x, y):
-        Sprite.__init__(self)
         self.game = game
-        self.groups = game.all_sprites, game.all_mobs
+        self.groups = game.all_sprites, game.all_bases
+        Sprite.__init__(self, self.groups)
         self.image = pg.Surface((90,90))
         self.image = game.base_img 
         self.fade = 255
@@ -389,6 +389,8 @@ class Base(Sprite):
         self.vel = vec(0,0)
         self.pos = vec(x,y)*TILESIZE[0]
         self.cd = Cooldown(1000)
+        self.rect.x = self.pos.x
+        self.rect.y = self.pos.y
     
 
 

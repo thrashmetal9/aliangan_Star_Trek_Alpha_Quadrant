@@ -66,7 +66,7 @@ class Game:
       self.bg_img = pg.image.load(path.join(self.img_folder,'Space_Wallpaper.png')).convert_alpha()
       self.bg_img = pg.transform.scale(self.bg_img,(WIDTH, HEIGHT))
       self.base_img = pg.image.load(path.join(self.img_folder, 'Star_Base.png')).convert_alpha()
-      self.base_img = pg.transform.scale(self.base_img,(120,120))
+      self.base_img = pg.transform.scale(self.base_img,(220,220))
 
     def new(self):
       # the sprite Group allows us to upate and draw sprite in grouped batches using imported files, etc.
@@ -78,7 +78,7 @@ class Game:
       self.all_coins = pg.sprite.Group()
       self.all_walls = pg.sprite.Group()
       self.all_projectiles = pg.sprite.Group()
-      self.base = Base(self,100,100)
+      self.all_bases = pg.sprite.Group()
        #instantiation of the player class in self.player which is a property of our game 
       self.player = Player(self, 100, 100)
       #For loop for adding mob
@@ -109,8 +109,9 @@ class Game:
                self.player = Player(self,col,row)
             elif tile == 'M':
                Mob(self,col,row)
-            elif tile == 'S':
+            if tile == 'S':
                 self.base = Base(self,col,row)
+                
 
 #Passing Mob class into the class of game so that it has access to the game
 
