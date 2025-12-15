@@ -529,6 +529,7 @@ class Projectile(Sprite):
         #     self.vel = vec(0,-1)
         #     self.pos = vec(x,y)
         #     self.speed = 10
+    
     def update(self):
         self.pos += self.vel * self.speed
         self.rect.x = self.pos.x

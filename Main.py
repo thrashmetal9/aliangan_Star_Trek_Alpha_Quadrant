@@ -66,12 +66,13 @@ class Game:
       self.bg_img = pg.image.load(path.join(self.img_folder,'Space_Wallpaper.png')).convert_alpha()
       self.bg_img = pg.transform.scale(self.bg_img,(WIDTH, HEIGHT))
       self.base_img = pg.image.load(path.join(self.img_folder, 'Star_Base.png')).convert_alpha()
-      self.base_img = pg.transform.scale(self.base_img,(220,220))
+      self.base_img = pg.transform.scale(self.base_img,(320,320))
 
     def new(self):
       # the sprite Group allows us to upate and draw sprite in grouped batches using imported files, etc.
       # SPRITE is the visual elements on the screen of our code  
       #Adding things to our new game, mobs, Players, etc.
+      #Converts the elements into groups for our game 
       self.load_data()
       self.all_sprites = pg.sprite.Group()
       self.all_mobs = pg.sprite.Group()
