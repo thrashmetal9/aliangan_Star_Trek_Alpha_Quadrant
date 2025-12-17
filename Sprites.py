@@ -526,6 +526,7 @@ class Projectile(Sprite):
         self.rect.x = x
         self.rect.y = y
         self.speed = 10
+        self.health = 200
         print
     def update(self):
         self.pos += self.vel * self.speed

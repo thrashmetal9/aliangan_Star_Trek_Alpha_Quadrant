@@ -144,7 +144,11 @@ class Game:
             self.update()
             # output
             self.draw()
+            if self.player.health == 0:
+                pg.quit()
         pg.quit()
+
+        
 
     def events(self):
         #Game behavior when user interacts 
