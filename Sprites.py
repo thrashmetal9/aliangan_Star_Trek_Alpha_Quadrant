@@ -82,6 +82,7 @@ class Player(Sprite):
     def get_keys(self):
         self.vel = vec(0,0)
         keys = pg.key.get_pressed()
+        #Allows firing of projectiles 
         if keys[pg.K_SPACE]: 
             p = Projectile(self.game, self.rect.x, self.rect.y, self.dir)
             # else:

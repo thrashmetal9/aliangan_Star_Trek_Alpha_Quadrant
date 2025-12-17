@@ -8,15 +8,22 @@
 
 #Mechanical Goals: 
 #Players can move ship on x and y axis 
-#Players can only make ranged attacks
-#Sound effects for Music, lasers being fired, and when ships get hit 
+#Players can only make ranged attack
 #Design a path system for Mob 
 #Use an image for Sprites for Player and Mob 
 
 #Rules:
-#Players cannot collide with the end of the map or the game ends
+#Players cannot collide with the end of the map 
 #Players also cannot collide with an enemy mob or else health is lost 
-#Players cannot fire upon their own base as the objective is to defend 
+
+#Feedback:
+#Create a projectile system to kill mob to see the goal of the game. 
+#Try to see if a few simple bugs could be fixed  
+
+#Features from Alpha and Beta Relases:
+#Improvised Pathing-like system for Mob
+#Projectile System from Player
+#Starbase Sprite (final release feature)
 
 
 import math
@@ -206,3 +213,4 @@ if __name__ == "__main__":
 #Sources: Mr. Cozart's course resources code 
 # ChatGPT
 # Mr.Cozart's Github Link 
+#Mr. Cozart Himself 
