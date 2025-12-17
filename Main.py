@@ -25,6 +25,11 @@
 #Projectile System from Player
 #Starbase Sprite (final release feature)
 
+#Sources: Mr. Cozart's course resources code 
+# ChatGPT
+# Mr.Cozart's Github Link 
+#Mr. Cozart Himself 
+
 
 import math
 import random
@@ -210,7 +215,3 @@ if __name__ == "__main__":
         g.new()
         g.run()
 
-#Sources: Mr. Cozart's course resources code 
-# ChatGPT
-# Mr.Cozart's Github Link 
-#Mr. Cozart Himself 
