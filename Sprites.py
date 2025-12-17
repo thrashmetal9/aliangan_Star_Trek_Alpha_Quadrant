@@ -520,6 +520,7 @@ class Projectile(Sprite):
         self.image.fill(RED)
         self.rect = self.image.get_rect()
         self.vel = dir
+        #This allows the projectile to travel whatever direction the player is facing 
         self.pos = vec(x,y)
         self.rect.x = x
         self.rect.y = y
