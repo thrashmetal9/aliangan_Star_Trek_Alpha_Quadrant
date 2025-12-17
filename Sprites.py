@@ -48,6 +48,7 @@ class Player(Sprite):
         self.last_update = 0
         self.jump_power = 100
         self.facing = ""
+        # self.can_fire = True 
     # def jump(self):
     #     hits = pg.sprite.collide(self, self.game.all_walls, False)
     #     self.rect.y += 1
@@ -82,8 +83,9 @@ class Player(Sprite):
         self.vel = vec(0,0)
         keys = pg.key.get_pressed()
         if keys[pg.K_SPACE]: 
-            print(self.rect.x)
             p = Projectile(self.game, self.rect.x, self.rect.y, self.dir)
+            # else:
+            #     p = Projectile(self.game, self.rect.x, self.rect.y, 10, 8, self.dir)
         # if keys[pg.K_e]:
             # p = Projectile(self.game, self.rect.x, self.rect.y, self.dir)
         #Used Chat GPT to help with the transform flip vertically. 
@@ -510,26 +512,19 @@ class Wall(Sprite):
 #         self.rect = self.image.get_rect()
 class Projectile(Sprite): 
     def __init__(self, game, x, y, dir):
-        keys = pg.key.get_pressed()
         self.game = game
-        self.groups = game.all_sprites, game.all_projectiles 
+        self.groups = game.all_sprites, game.all_projectiles
         Sprite.__init__(self, self.groups)
         self.game = game
-        self.image = pg.Surface((42, 8))
+        self.image = pg.Surface((16, 16))
         self.image.fill(RED)
         self.rect = self.image.get_rect()
         self.vel = dir
-        #Ensures that the projectile travels in the same direction the player faces
         self.pos = vec(x,y)
         self.rect.x = x
         self.rect.y = y
-        self.speed = 20
-        # if keys[pg.K_i]:
-        #     self.image = pg.Surface((32,85))
-        #     self.vel = vec(0,-1)
-        #     self.pos = vec(x,y)
-        #     self.speed = 10
-    
+        self.speed = 10
+        print
     def update(self):
         self.pos += self.vel * self.speed
         self.rect.x = self.pos.x
